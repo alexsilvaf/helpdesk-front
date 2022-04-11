@@ -42,7 +42,7 @@ export class TecnicoUpdateComponent implements OnInit {
   findById(): void{
     this.service.findById(this.tecnico.id).subscribe(resposta => {
       resposta.perfis = []
-      resposta.senha = undefined
+      resposta.senha = '**********'
       this.tecnico = resposta;
     })
   }
