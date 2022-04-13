@@ -13,8 +13,8 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
 
   creds: Credenciais = {
-    email: '',
-    senha: ''
+    email: 'admin@mail.com',
+    senha: '123'
   }
 
   email = new FormControl(null, Validators.email);
