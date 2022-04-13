@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       this.service.successfulLogin(resposta.headers.get('Authorization').substring(7));
       this.router.navigate(['home']);
       this.toast.clear();
-      this.toast.info('Login realizado com sucesso', 'Sistema', { timeOut: 7000 });
+      this.toast.info('Login realizado com sucesso', 'Sistema');
     }, () => {
       this.toast.error("Usuário e/ou senha inválidos");
       this.creds.senha = '';
