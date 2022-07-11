@@ -5,8 +5,11 @@
 }
 
 h1 {
+}
+
+img{
+    height: 50px;
     margin-top: 1rem;
-    border: 1px solid rgb(161,159,159);
     padding: 1rem 10%;
     border-radius: 2rem;
 }

@@ -18,12 +18,25 @@ img{
     color: white;
 }
 
+.d-flex{
+    display: flex;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.logo{
+    justify-content: center;
+}
+
 .sidenav i {
     margin-right: .6rem;
 }
 
 .menu{
-    margin: 1rem 0 0 1rem;
+    border-radius: 0px 0px 10px 0px;
+    margin: 0;
     color:white;
     background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(37,97,207,1) 0%, rgba(0,212,255,1) 100%);
 }

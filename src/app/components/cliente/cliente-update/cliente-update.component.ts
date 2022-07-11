@@ -12,6 +12,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class ClienteUpdateComponent implements OnInit {
 
+  selectedAdmin: boolean;
+  selectedCliente: boolean;
+  selectedTecnico: boolean;
+
   cliente: Cliente = {
     id: '',
     nome: '',
@@ -41,7 +45,23 @@ export class ClienteUpdateComponent implements OnInit {
 
   findById(): void{
     this.service.findById(this.cliente.id).subscribe(resposta => {
-      resposta.perfis = []
+      resposta.perfis.map(x => {
+        if(x === 'ADMIN') {
+          this.addPerfil(0)
+          this.selectedAdmin = true;
+        }
+
+        if(x === 'CLIENTE') {
+          this.addPerfil(1)
+          this.selectedCliente = true;
+        }
+
+        if(x === 'TECNICO') {
+          this.addPerfil(2)
+          this.selectedTecnico = true;
+        }
+      })
+      resposta.perfis = this.cliente.perfis;
       resposta.senha = '**********'
       this.cliente = resposta;
     })

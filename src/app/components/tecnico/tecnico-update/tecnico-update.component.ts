@@ -12,6 +12,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class TecnicoUpdateComponent implements OnInit {
 
+  selectedAdmin: boolean;
+  selectedCliente: boolean;
+  selectedTecnico: boolean;
+
   tecnico: Tecnico = {
     id: '',
     nome: '',
@@ -36,18 +40,40 @@ export class TecnicoUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.tecnico.id = this.route.snapshot.paramMap.get('id')
+    this.loadData();
+  }
+
+  loadData(): void {
     this.findById()
   }
 
   findById(): void{
     this.service.findById(this.tecnico.id).subscribe(resposta => {
-      resposta.perfis = []
+      resposta.perfis.map(x => {
+        if(x === 'ADMIN') {
+          this.addPerfil(0)
+          this.selectedAdmin = true;
+        }
+
+        if(x === 'CLIENTE') {
+          this.addPerfil(1)
+          this.selectedCliente = true;
+        }
+
+        if(x === 'TECNICO') {
+          this.addPerfil(2)
+          this.selectedTecnico = true;
+        }
+      })
+      resposta.perfis = this.tecnico.perfis;
       resposta.senha = '**********'
       this.tecnico = resposta;
+      console.log(this.tecnico.perfis)
     })
   }
 
   update(): void{
+    console.log(this.tecnico)
     this.service.update(this.tecnico).subscribe(() => {
       this.toast.success('Técnico atualizado com sucesso', 'Update');
       this.router.navigate(['tecnicos']);
