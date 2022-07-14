@@ -18,19 +18,22 @@ export class NavComponent implements OnInit {
 
   @HostListener('window:resize')
   getScreenSize() {
-    if(this.scrWidth > window.innerWidth) this.drawer.toggle();
+    if(this.scrWidth > window.innerWidth) this.drawer.close();
     this.scrWidth = window.innerWidth;
+  }
+
+  toggleDrawer(){
+    if(this.scrWidth <= 600) this.drawer.toggle();
   }
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private toast: ToastrService) {
-    this.getScreenSize();
-  }
+    private toast: ToastrService) {}
 
   ngOnInit(): void {
-    this.router.navigate(['home'])
+    this.router.navigate(['home']);
+    this.getScreenSize();
   }
 
   logout() {

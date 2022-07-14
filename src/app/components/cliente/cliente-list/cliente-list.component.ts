@@ -25,11 +25,11 @@ export class ClienteListComponent implements OnInit {
   }
 
   constructor(private service: ClienteService) {
-    this.getScreenSize();
   }
 
   ngOnInit(): void {
-    this.findAll()
+    this.findAll();
+    this.getScreenSize();
   }
 
   findAll() {

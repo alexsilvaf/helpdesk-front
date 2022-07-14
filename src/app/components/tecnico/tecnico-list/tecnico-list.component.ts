@@ -25,11 +25,11 @@ export class TecnicoListComponent implements OnInit {
   }
 
   constructor(private service: TecnicoService) {
-    this.getScreenSize();
   }
 
   ngOnInit(): void {
-    this.findAll()
+    this.findAll();
+    this.getScreenSize();
   }
 
   findAll() {
