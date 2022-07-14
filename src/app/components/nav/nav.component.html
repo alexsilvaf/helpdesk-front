@@ -1,20 +1,20 @@
 <mat-drawer-container class="container" autosize>
-    <mat-drawer #drawer class="sidenav" mode="side">
+    <mat-drawer #drawer class="sidenav" mode="side" name="drawer">
         <img src="assets/img/side-image.svg" alt="Imagem de navegação">
         <mat-nav-list class="nav-list">
-            <a mat-list-item routerLink="home">
+            <a mat-list-item routerLink="home" (click)="drawer.toggle()">
                 <i class="material-icons">home</i>
                 Home
             </a>
-            <a mat-list-item routerLink="tecnicos">
+            <a mat-list-item routerLink="tecnicos" (click)="drawer.toggle()">
                 <i class="material-icons">account_circle</i>
                 Técnicos
             </a>
-            <a mat-list-item routerLink="clientes">
+            <a mat-list-item routerLink="clientes" (click)="drawer.toggle()">
                 <i class="material-icons">person</i>
                 Clientes
             </a>
-            <a mat-list-item routerLink="chamados">
+            <a mat-list-item routerLink="chamados" (click)="drawer.toggle()">
                 <i class="material-icons">support</i>
                 Chamados
             </a>
@@ -22,7 +22,7 @@
                 <i class="material-icons">code</i>
                 Github
             </a>
-            <a (click)="logout()" mat-list-item routerLink="/">
+            <a (click)="logout()" mat-list-item routerLink="/" (click)="drawer.toggle()">
                 <i class="material-icons">logout</i>
                 Logout
             </a>

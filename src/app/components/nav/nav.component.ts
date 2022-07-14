@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
-import {AuthService} from "../../services/auth.service";
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatDrawer } from '@angular/material/sidenav';
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-nav',
@@ -9,17 +11,29 @@ import {AuthService} from "../../services/auth.service";
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  @ViewChild('drawer') drawer: MatDrawer;
+  scrWidth: any;
 
-  constructor(
-      private router: Router,
-      private authService: AuthService,
-      private toast: ToastrService) { }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  ngOnInit(): void {
-    this.router.navigate(['home'])
+  @HostListener('window:resize')
+  getScreenSize() {
+    if(this.scrWidth > window.innerWidth) this.drawer.toggle();
+    this.scrWidth = window.innerWidth;
   }
 
-  logout(){
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private toast: ToastrService) {
+    this.getScreenSize();
+  }
+
+  ngOnInit(): void {
+    this.router.navigate(['clientes'])
+  }
+
+  logout() {
     this.router.navigate(['login'])
     this.authService.logout();
     this.toast.clear();

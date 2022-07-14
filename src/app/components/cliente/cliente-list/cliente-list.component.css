@@ -21,6 +21,28 @@ h1{
     margin-bottom: 2rem;
 }
 
+.menu-link{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.color-red{
+    color: red;
+}
+
+.color-blue{
+    color: rgb(0, 153, 255);
+}
+
+.btn-more{
+    min-width: 0px;
+    width:0px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+}
+
 .edit{
     color: rgb(0, 153, 255);
 }

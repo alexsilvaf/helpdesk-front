@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {Tecnico} from "../../../models/tecnico";
@@ -13,21 +13,27 @@ export class TecnicoListComponent implements OnInit {
 
   ELEMENT_DATA: Tecnico[] = []
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'acoes'];
+  displayedColumns: string[] = ['nome', 'email', 'acoes'];
   dataSource = new MatTableDataSource<Tecnico>(this.ELEMENT_DATA);
+  scrWidth: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(
-      private service: TecnicoService
-  ) { }
+  @HostListener('window:resize')
+  getScreenSize() {
+    this.scrWidth = window.innerWidth;
+  }
+
+  constructor(private service: TecnicoService) {
+    this.getScreenSize();
+  }
 
   ngOnInit(): void {
     this.findAll()
   }
 
-  findAll(){
-    this.service.findAll().subscribe( resposta => {
+  findAll() {
+    this.service.findAll().subscribe(resposta => {
       this.ELEMENT_DATA = resposta
       this.dataSource = new MatTableDataSource<Tecnico>(resposta);
       this.dataSource.paginator = this.paginator;

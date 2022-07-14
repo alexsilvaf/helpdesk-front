@@ -22,16 +22,32 @@
                 <td mat-cell *matCellDef="let element"> {{element.email}} </td>
             </ng-container>
 
-
             <ng-container matColumnDef="acoes">
                 <th mat-header-cell *matHeaderCellDef> Ações </th>
                 <td mat-cell *matCellDef="let element">
-                    <a routerLink="update/{{ element.id }}">
-                        <i class="material-icons edit">edit</i>
-                    </a>
-                    <a routerLink="delete/{{ element.id }}">
-                        <i class="material-icons delete">delete</i>
-                    </a>
+                    <button *ngIf="scrWidth < 600px" mat-button [matMenuTriggerFor]="menu" class="btn-more">
+                        <i class="material-icons more_vert">more_vert</i>
+                    </button>
+                    <div *ngIf="scrWidth >= 600px">
+                        <a routerLink="update/{{ element.id }}">
+                            <i class="material-icons edit">edit</i>
+                        </a>
+                        <a routerLink="delete/{{ element.id }}">
+                            <i class="material-icons delete">delete</i>
+                        </a>
+                    </div>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <a routerLink="update/{{ element.id }}" class="menu-link color-blue">
+                                <i class="material-icons edit">edit</i> Editar
+                            </a>
+                        </button>
+                        <button mat-menu-item>
+                            <a routerLink="delete/{{ element.id }}" class="menu-link color-red">
+                                <i class="material-icons delete">delete</i> Deletar
+                            </a>
+                        </button>
+                    </mat-menu>
                 </td>
             </ng-container>
 
@@ -39,9 +55,8 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                       showFirstLastButtons
-                       aria-label="Select page of periodic elements">
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
         </mat-paginator>
     </div>
 </div>

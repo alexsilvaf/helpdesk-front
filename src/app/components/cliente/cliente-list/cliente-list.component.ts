@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
-import {Cliente} from "../../../models/cliente";
-import {ClienteService} from "../../../services/cliente.service";
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
+import { Cliente } from "../../../models/cliente";
+import { ClienteService } from "../../../services/cliente.service";
 
 @Component({
   selector: 'app-cliente-list',
@@ -15,19 +15,25 @@ export class ClienteListComponent implements OnInit {
 
   displayedColumns: string[] = ['nome', 'email', 'acoes'];
   dataSource = new MatTableDataSource<Cliente>(this.ELEMENT_DATA);
+  scrWidth: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(
-      private service: ClienteService
-  ) { }
+  @HostListener('window:resize')
+  getScreenSize() {
+    this.scrWidth = window.innerWidth;
+  }
+
+  constructor(private service: ClienteService) {
+    this.getScreenSize();
+  }
 
   ngOnInit(): void {
     this.findAll()
   }
 
-  findAll(){
-    this.service.findAll().subscribe( resposta => {
+  findAll() {
+    this.service.findAll().subscribe(resposta => {
       this.ELEMENT_DATA = resposta
       this.dataSource = new MatTableDataSource<Cliente>(resposta);
       this.dataSource.paginator = this.paginator;
