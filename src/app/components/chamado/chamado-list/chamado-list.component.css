@@ -21,12 +21,40 @@ h1{
     margin-bottom: 2rem;
 }
 
+.menu-link{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.aberto{
+    color: lime;
+}
+
+.em-andamento{
+    color: orange;
+}
+
+.finalizado{
+    color: grey;
+}
+
+.red{
+    color: red;
+}
+
+.text-center{
+    text-align: center;
+}
+
 .edit{
     color: rgb(0, 153, 255);
+    margin-right: 5px;
 }
 
 .visibility{
     color: mediumseagreen;
+    margin-right: 5px;
 }
 
 mat-radio-group{

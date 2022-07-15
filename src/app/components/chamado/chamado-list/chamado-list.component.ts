@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {Chamado} from "../../../models/chamado";
@@ -14,15 +14,22 @@ export class ChamadoListComponent implements OnInit {
   ELEMENT_DATA: Chamado[] = []
   FILTRED_DATA: Chamado[] = []
 
-  displayedColumns: string[] = ['id', 'titulo', 'cliente', 'tecnico', 'dataAbertura', 'prioridade', 'status', 'acoes'];
+  displayedColumns: string[] = ['titulo', 'prioridade', 'status', 'acoes']; //REMOVIDO: ID, DATA ABERTURA, CLIENTE, TECNICO
   dataSource = new MatTableDataSource<Chamado>(this.ELEMENT_DATA);
+  scrWidth: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  @HostListener('window:resize')
+  getScreenSize() {
+    this.scrWidth = window.innerWidth;
+  }
 
   constructor(private service: ChamadoService) { }
 
   ngOnInit(): void {
-    this.findAll()
+    this.findAll();
+    this.getScreenSize();
   }
 
   findAll(): void{
@@ -44,7 +51,7 @@ export class ChamadoListComponent implements OnInit {
     } else if (status == '1'){
       return 'EM ANDAMENTO';
     } else {
-      return 'ENCERRADO';
+      return 'FECHADO';
     }
   }
 
